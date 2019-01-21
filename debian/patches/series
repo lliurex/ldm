@@ -1,0 +1,3 @@
+remove-hackish-gettext-function
+python3-shebang
+use-utf8-locale-to-generate-locale-lists

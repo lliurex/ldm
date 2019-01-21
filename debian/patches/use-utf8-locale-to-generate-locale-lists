@@ -1,0 +1,14 @@
+Use C.UTF-8 locale to generate locale lists, otherwise locales which
+require UTF-8 to display the language name or country may be omitted
+from the locale list.
+
+Index: ldm/Makefile.am
+===================================================================
+--- ldm.orig/Makefile.am
++++ ldm/Makefile.am
+@@ -10,4 +10,4 @@ ldmdir = $(pkgdatadir)
+ ldm_DATA = locales
+ 
+ locales: generate_locale_list.py
+-	./generate_locale_list.py locales
++	LC_ALL=C.UTF-8 ./generate_locale_list.py locales

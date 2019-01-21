@@ -1,0 +1,29 @@
+#! /bin/sh /usr/share/dpatch/dpatch-run
+## kfreebsd-hacks.dpatch by  <vagrant@debian.org>
+##
+## All lines beginning with `## DP:' are a description of the patch.
+## DP: add support for kfreebsd by defining WEXITED and HOST_NAME_MAX.
+
+@DPATCH@
+diff -urNad '--exclude=CVS' '--exclude=.svn' '--exclude=.git' '--exclude=.arch' '--exclude=.hg' '--exclude=_darcs' '--exclude=.bzr' ldm-2.1.1~/src/ldm.c ldm-2.1.1/src/ldm.c
+--- ldm-2.1.1~/src/ldm.c	2010-04-08 17:19:13.000000000 -0700
++++ ldm-2.1.1/src/ldm.c	2010-04-08 17:24:34.000000000 -0700
+@@ -50,6 +50,18 @@
+ 
+ #define LOGFILE "/var/log/ldm.log"
+ 
++#if defined(__FreeBSD__) && ! defined(__FreeBSD_kernel__)
++# define __FreeBSD_kernel__ __FreeBSD__
++#endif
++
++#if ! defined(WEXITED)
++#define WEXITED 0
++#endif
++
++#if defined(__FreeBSD_kernel__) && ! defined(HOST_NAME_MAX)
++#define HOST_NAME_MAX sysconf(_SC_HOST_NAME_MAX)
++#endif
++
+ GHashTable *ldminfo_hash = NULL;
+ GList *host_list = NULL;
+ volatile sig_atomic_t unexpected_child = 0;

@@ -1,0 +1,22 @@
+Patch locale list generation and ldminfod to use python3 interpreter.
+
+Index: ldm/generate_locale_list.py
+===================================================================
+--- ldm.orig/generate_locale_list.py
++++ ldm/generate_locale_list.py
+@@ -1,4 +1,4 @@
+-#!/usr/bin/python
++#!/usr/bin/python3
+ # -*- coding: utf-8 -*-
+ 
+ #  Copyright 2009 Ryan Niebur <RyanRyan52@gmail.com>
+Index: ldm/ldminfod/ldminfod
+===================================================================
+--- ldm.orig/ldminfod/ldminfod
++++ ldm/ldminfod/ldminfod
+@@ -1,4 +1,4 @@
+-#!/usr/bin/python
++#!/usr/bin/python3
+ 
+ #  Copyright (c) 2006 Canonical LTD
+ #

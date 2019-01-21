@@ -1,0 +1,2 @@
+debian/tmp/*
+ldminfod/ldminfod /usr/share/ldm/

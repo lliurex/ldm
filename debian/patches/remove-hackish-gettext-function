@@ -1,0 +1,31 @@
+#! /bin/sh /usr/share/dpatch/dpatch-run
+## remove-hackish-gettext-function.dpatch by Vagrant Cascadian <vagrant@freegeek.org>
+##
+## All lines beginning with `## DP:' are a description of the patch.
+## DP: always use gettext.sh, rather than our own hackish and buggy
+## DP: implementation, which may have security issues.
+
+@DPATCH@
+Index: ldm-trunk/share/ldm-script.in
+===================================================================
+--- ldm-trunk.orig/share/ldm-script.in	2012-04-02 13:22:31.963008519 -0700
++++ ldm-trunk/share/ldm-script.in	2012-04-13 08:05:38.170045995 -0700
+@@ -34,17 +34,7 @@
+ 
+ export TEXTDOMAIN=ldmrc
+ 
+-if [ -f /usr/bin/gettext.sh ]; then
+-    . /usr/bin/gettext.sh
+-else
+-    eval_gettext() {
+-        if [ $"test" = "\$test" ]; then
+-            eval "echo $*"
+-        else
+-            echo $"$*"
+-        fi
+-    }
+-fi
++. /usr/bin/gettext.sh
+ 
+ # source ltsp client functions
+ if [ -f "/usr/share/ltsp/ltsp-client-functions" ]; then

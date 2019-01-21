@@ -1,0 +1,59 @@
+Source: ldm
+Section: misc
+Priority: optional
+Maintainer: LTSP Debian Maintainers <pkg-ltsp-devel@lists.alioth.debian.org>
+Uploaders: Vagrant Cascadian <vagrant@debian.org>
+Build-Depends: debhelper (>= 10), flex, bison, libpopt-dev, libgtk2.0-dev,
+  intltool, iso-codes, locales, python3, dctrl-tools
+Standards-Version: 4.1.1
+Vcs-Git: https://git.launchpad.net/~ltsp-upstream/ltsp/+git/ldm -b debian/master
+Vcs-Browser: https://git.launchpad.net/~ltsp-upstream/ltsp/+git/ldm
+Homepage: http://ltsp.org/
+
+Package: ldm
+Depends: ${misc:Depends}, ${shlibs:Depends},
+ openssh-client | ssh,
+ xserver-xorg | xserver,
+ gettext-base,
+ python3,
+ procps
+Architecture: any
+Breaks: ltsp-client-core (<= 5.0.40~bzr20080121-2)
+Replaces: ltsp-client-core (<= 5.0.40~bzr20080121-2)
+Recommends: ${vendor:Recommends},
+ netcat-traditional | netcat,
+ gtk2-engines, dmz-cursor-theme,
+X-Debian-Recommends: ldm-themes (>= 12.07.1)
+Description: LTSP display manager
+ ldm is an X11 display manager similar to xdm, gdm and kdm, but unlike
+ those it wraps the X11 traffic within an SSH tunnel to provide a
+ secure login mechanism for remote X sessions.
+ .
+ LTSP stands for 'Linux Terminal Server Project'.
+
+Package: ldm-server
+Depends: ${misc:Depends}, ${shlibs:Depends},
+ python3,
+ x11-common,
+ openssh-server,
+ update-inetd, openbsd-inetd | inet-superserver
+Recommends: ${vendor:Recommends},
+ ltspfs,
+ libasound2-plugins,
+ xauth
+X-Debian-Recommends: mate-desktop-environment | gnome-session | x-session-manager | x-window-manager
+X-Ubuntu-Recommends: gnome-session | mate-desktop-environment | x-session-manager | x-window-manager
+Breaks: ltsp-server (<= 5.1.62)
+Replaces: ltsp-server (<= 5.1.62)
+Architecture: all
+Description: server components for LTSP display manager
+ ldm is an X11 display manager similar to xdm, gdm and kdm, but unlike
+ those it wraps the X11 traffic within an SSH tunnel to provide a
+ secure login mechanism for remote X sessions.
+ .
+ This package includes the server components used by ldm to discover
+ available sessions and locales on the server. It also recommends
+ packages relevant for local device access, a login session, and remote
+ sound.
+ .
+ LTSP stands for 'Linux Terminal Server Project'.

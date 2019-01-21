@@ -1,0 +1,25 @@
+#!/usr/bin/make -f
+
+export ENABLE_NLS=1
+export DEB_BUILD_MAINT_OPTIONS = hardening=+all
+
+VENDOR ?= $(shell dpkg-vendor --derives-from Ubuntu && echo Ubuntu || echo Debian)
+
+%:
+	dh $@
+
+override_dh_install:
+	dh_install
+	rm -f debian/ldm/usr/lib/*/ldm/*.la
+
+override_dh_fixperms:
+	dh_fixperms
+	# ensure ldm-script is executable to avoid lintian warning
+	test ! -f debian/ldm/usr/share/ldm/ldm-script || chmod +x debian/ldm/usr/share/ldm/ldm-script
+
+override_dh_autoreconf:
+	dh_autoreconf ./autogen.sh
+
+override_dh_gencontrol:
+	./debian/x-vendor-substvars $(VENDOR)
+	dh_gencontrol
