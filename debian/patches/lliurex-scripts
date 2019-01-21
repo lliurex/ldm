@@ -6,7 +6,7 @@ diff -uNar ldm_2.2.19.orig.semipatched.orig/generate_locale_list.py ldm_2.2.19.o
  
  def nice_name(my_locale):
 +    if "ca_ES" in  my_locale:
-+	return "Valencià; (Espanya)"
++        return "Valencià; (Espanya)"
      if my_locale == "":
          return ""
      if not re.search("_", my_locale) and len(my_locale) != 2:
