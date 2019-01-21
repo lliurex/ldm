@@ -1,3 +1,9 @@
+ldm (2:2.2.19-1+lliurex1) bionic; urgency=medium
+
+  * Lliurex release
+
+ -- Hector Garcia Huerta <hectorgh@gmail.com>  Mon, 21 Jan 2019 16:45:20 +0100
+
 ldm (2:2.2.19-1) unstable; urgency=medium
 
   * New upstream version.
