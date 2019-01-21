@@ -1,0 +1,238 @@
+Description: <short summary of the patch>
+ TODO: Put a short summary on the line above and replace this paragraph
+ with a longer explanation of this change. Complete the meta-information
+ with other relevant fields (see below for details). To make it easier, the
+ information below has been extracted from the changelog. Adjust it or drop
+ it.
+ .
+ ldm (2:2.2.18-1) unstable; urgency=medium
+ .
+   * New upstream version.
+     - Display LDM only in the first monitor (LP: #693151).
+     - DesktopNames replaced X-LightDM-DesktopName in xsession files
+       (GNOME: #727546).
+     - Fix invalid syntax in .dmrc parsing the default session.
+ .
+   * debian/control: Update Vcs-Browser to use https URL.
+Author: Vagrant Cascadian <vagrant@debian.org>
+Bug-Ubuntu: https://bugs.launchpad.net/bugs/693151
+
+---
+The information above should follow the Patch Tagging Guidelines, please
+checkout http://dep.debian.net/deps/dep3/ to learn about the format. Here
+are templates for supplementary fields that you might want to add:
+
+Origin: <vendor|upstream|other>, <url of original patch>
+Bug: <url in upstream bugtracker>
+Bug-Debian: https://bugs.debian.org/<bugnumber>
+Bug-Ubuntu: https://launchpad.net/bugs/<bugnumber>
+Forwarded: <no|not-needed|url proving that it has been forwarded>
+Reviewed-By: <name and email of someone who approved the patch>
+Last-Update: <YYYY-MM-DD>
+
+--- /dev/null
++++ ldm-2.2.18/ca_ES@valencia.po
+@@ -0,0 +1,96 @@
++# Catalan translation for ldm
++# Copyright (c) 2008 Rosetta Contributors and Canonical Ltd 2008
++# This file is distributed under the same license as the ldm package.
++# FIRST AUTHOR <EMAIL@ADDRESS>, 2008.
++#
++msgid ""
++msgstr ""
++"Project-Id-Version: ldm\n"
++"Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
++"POT-Creation-Date: 2011-07-12 21:42-0700\n"
++"PO-Revision-Date: 2010-08-31 07:38+0000\n"
++"Last-Translator: David Planella <david.planella@ubuntu.com>\n"
++"Language-Team: Catalan <ca@li.org>\n"
++"MIME-Version: 1.0\n"
++"Content-Type: text/plain; charset=UTF-8\n"
++"Content-Transfer-Encoding: 8bit\n"
++"X-Launchpad-Export-Date: 2014-01-06 16:02+0000\n"
++"X-Generator: Launchpad (build 16877)\n"
++
++#: ../src/plugin.c:20
++msgid "Username"
++msgstr "Nom d'usuari"
++
++#: ../src/plugin.c:32
++msgid "Password"
++msgstr "Contrasenya"
++
++#: ../src/plugin.c:35
++msgid "Verifying password.  Please wait."
++msgstr "S'està verificant la contrasenya. Espereu..."
++
++#: ../src/plugins/ssh/ssh.c:388
++msgid "No response from server, restarting..."
++msgstr "No hi ha cap resposta del servidor, s'està reiniciant..."
++
++#: ../gtkgreet/greeter.c:250
++#, c-format
++msgid "Automatic login in %d seconds"
++msgstr "Entrarà automàticament en %d segons"
++
++#: ../gtkgreet/greeter.c:513
++msgid "Select _Language ..."
++msgstr "Seleccioneu _la llengua"
++
++#: ../gtkgreet/greeter.c:523
++msgid "Select _Session ..."
++msgstr "Seleccioneu la _sessió"
++
++#: ../gtkgreet/greeter.c:533
++msgid "Select _Host ..."
++msgstr "Seleccioneu _el servidor"
++
++#: ../gtkgreet/greeter.c:566
++msgid "_Reboot"
++msgstr "_Reinicia"
++
++#: ../gtkgreet/greeter.c:574
++msgid "Shut_down"
++msgstr "_Apaga"
++
++#: ../gtkgreet/greeter.c:718
++msgid "_Preferences"
++msgstr "_Preferències"
++
++#: ../gtkgreet/greeter.c:812
++msgid "Login as Guest"
++msgstr "Entra com a convidat"
++
++#: ../gtkgreet/sesswin.c:105 ../gtkgreet/langwin.c:104
++#: ../gtkgreet/prefwin.c:89
++msgid "Default"
++msgstr "Per defecte"
++
++#: ../gtkgreet/sesswin.c:107
++msgid "Failsafe xterm"
++msgstr "L'xterm a prova de fallades"
++
++#: ../gtkgreet/sesswin.c:130
++msgid "Change _Session"
++msgstr "Canvia la _sessió"
++
++#: ../gtkgreet/sesswin.c:141
++msgid "Select your session manager:"
++msgstr "Seleccioneu el gestor de sessions:"
++
++#: ../gtkgreet/hostwin.c:123
++msgid "Select the host for your session to use:"
++msgstr "Seleccioneu el servidor per la sessió actual"
++
++#: ../gtkgreet/langwin.c:127
++msgid "Change _Language"
++msgstr "Canvia la _llengua"
++
++#: ../gtkgreet/langwin.c:138
++msgid "Select the language for your session to use:"
++msgstr "Seleccioneu la llengua per la sessió actual:"
+--- ldm-2.2.18.orig/po/LINGUAS
++++ ldm-2.2.18/po/LINGUAS
+@@ -1,4 +1,5 @@
+ #list all languages here, keep it alphabatical
++ca_ES@valencia
+ da
+ de
+ el
+--- /dev/null
++++ ldm-2.2.18/po/ca_ES@valencia.po
+@@ -0,0 +1,96 @@
++# Catalan translation for ldm
++# Copyright (c) 2008 Rosetta Contributors and Canonical Ltd 2008
++# This file is distributed under the same license as the ldm package.
++# FIRST AUTHOR <EMAIL@ADDRESS>, 2008.
++#
++msgid ""
++msgstr ""
++"Project-Id-Version: ldm\n"
++"Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
++"POT-Creation-Date: 2011-07-12 21:42-0700\n"
++"PO-Revision-Date: 2010-08-31 07:38+0000\n"
++"Last-Translator: David Planella <david.planella@ubuntu.com>\n"
++"Language-Team: Catalan <ca@li.org>\n"
++"MIME-Version: 1.0\n"
++"Content-Type: text/plain; charset=UTF-8\n"
++"Content-Transfer-Encoding: 8bit\n"
++"X-Launchpad-Export-Date: 2014-01-06 16:02+0000\n"
++"X-Generator: Launchpad (build 16877)\n"
++
++#: ../src/plugin.c:20
++msgid "Username"
++msgstr "Nom d'usuari"
++
++#: ../src/plugin.c:32
++msgid "Password"
++msgstr "Contrasenya"
++
++#: ../src/plugin.c:35
++msgid "Verifying password.  Please wait."
++msgstr "S'està verificant la contrasenya. Espereu..."
++
++#: ../src/plugins/ssh/ssh.c:388
++msgid "No response from server, restarting..."
++msgstr "No hi ha cap resposta del servidor, s'està reiniciant..."
++
++#: ../gtkgreet/greeter.c:250
++#, c-format
++msgid "Automatic login in %d seconds"
++msgstr "Entrarà automàticament en %d segons"
++
++#: ../gtkgreet/greeter.c:513
++msgid "Select _Language ..."
++msgstr "Seleccioneu _la llengua"
++
++#: ../gtkgreet/greeter.c:523
++msgid "Select _Session ..."
++msgstr "Seleccioneu la _sessió"
++
++#: ../gtkgreet/greeter.c:533
++msgid "Select _Host ..."
++msgstr "Seleccioneu _el servidor"
++
++#: ../gtkgreet/greeter.c:566
++msgid "_Reboot"
++msgstr "_Reinicia"
++
++#: ../gtkgreet/greeter.c:574
++msgid "Shut_down"
++msgstr "_Apaga"
++
++#: ../gtkgreet/greeter.c:718
++msgid "_Preferences"
++msgstr "_Preferències"
++
++#: ../gtkgreet/greeter.c:812
++msgid "Login as Guest"
++msgstr "Entra com a convidat"
++
++#: ../gtkgreet/sesswin.c:105 ../gtkgreet/langwin.c:104
++#: ../gtkgreet/prefwin.c:89
++msgid "Default"
++msgstr "Per defecte"
++
++#: ../gtkgreet/sesswin.c:107
++msgid "Failsafe xterm"
++msgstr "L'xterm a prova de fallades"
++
++#: ../gtkgreet/sesswin.c:130
++msgid "Change _Session"
++msgstr "Canvia la _sessió"
++
++#: ../gtkgreet/sesswin.c:141
++msgid "Select your session manager:"
++msgstr "Seleccioneu el gestor de sessions:"
++
++#: ../gtkgreet/hostwin.c:123
++msgid "Select the host for your session to use:"
++msgstr "Seleccioneu el servidor per la sessió actual"
++
++#: ../gtkgreet/langwin.c:127
++msgid "Change _Language"
++msgstr "Canvia la _llengua"
++
++#: ../gtkgreet/langwin.c:138
++msgid "Select the language for your session to use:"
++msgstr "Seleccioneu la llengua per la sessió actual:"

@@ -1,0 +1,119 @@
+diff -uNar ldm_2.2.19.orig.semipatched.orig/generate_locale_list.py ldm_2.2.19.orig.semipatched/generate_locale_list.py
+--- ldm_2.2.19.orig.semipatched.orig/generate_locale_list.py	2019-01-21 14:41:34.636847630 +0100
++++ ldm_2.2.19.orig.semipatched/generate_locale_list.py	2019-01-21 14:44:00.174564929 +0100
+@@ -68,6 +68,8 @@
+     return myarr
+ 
+ def nice_name(my_locale):
++    if "ca_ES" in  my_locale:
++	return "Valencià; (Espanya)"
+     if my_locale == "":
+         return ""
+     if not re.search("_", my_locale) and len(my_locale) != 2:
+diff -uNar ldm_2.2.19.orig.semipatched.orig/ldminfod/ldminfod ldm_2.2.19.orig.semipatched/ldminfod/ldminfod
+--- ldm_2.2.19.orig.semipatched.orig/ldminfod/ldminfod	2019-01-21 14:41:34.632847692 +0100
++++ ldm_2.2.19.orig.semipatched/ldminfod/ldminfod	2019-01-21 14:58:50.960257295 +0100
+@@ -191,7 +191,8 @@
+             defaultlocale = line.split('=')[1].strip('"')
+ 
+     defaultlocale = defaultlocale.replace('UTF8', 'UTF-8')
+-    print("language:" + defaultlocale)
++    if len(defaultlocale) > 0 :
++        print("language:" + defaultlocale)
+     # Get list of valid locales from locale -a
+     try:
+         lines = Popen(['locale', '-a'], stdout=PIPE).communicate()[0]
+@@ -212,17 +213,19 @@
+         if new_langs:
+             langs=new_langs
+ 
++    supported_encodings = ['.utf8','.utf8@valencia']
+     langs.sort()
+     for lang in langs:
+-        lang = lang.rstrip().decode()
+-        if lang.endswith('.utf8'):
+-            # locale returns .utf8 when we want .UTF-8
+-            lang = lang.replace('.utf8','.UTF-8')
+-        else:
+-            # if locale did not end with .utf8, do not add to list
+-            continue
+-        if lang != 'POSIX' and lang != 'C' and lang != defaultlocale:
+-            print("language:" + lang)
++        for encoding in supported_encodings:
++            lang = lang.rstrip().decode()
++            if lang.endswith('.utf8'):
++                # locale returns .utf8 when we want .UTF-8
++                lang = lang.replace('.utf8','.UTF-8')
++            else:
++                # if locale did not end with .utf8, do not add to list
++                continue
++            if lang != 'POSIX' and lang != 'C' and lang != defaultlocale:
++                print("language:" + lang)
+     try:
+         lines = get_sessions('/usr/share/xsessions/')
+ 
+diff -uNar ldm_2.2.19.orig.semipatched.orig/rc.d/X50-generate-env ldm_2.2.19.orig.semipatched/rc.d/X50-generate-env
+--- ldm_2.2.19.orig.semipatched.orig/rc.d/X50-generate-env	2019-01-21 14:41:34.636847630 +0100
++++ ldm_2.2.19.orig.semipatched/rc.d/X50-generate-env	2019-01-21 14:45:01.657600501 +0100
+@@ -43,6 +43,10 @@
+     export MY_LANG
+ fi
+ 
++AUX_LANGUAGE=$(echo $LDM_LANGUAGE | sed -e 's/\.UTF-8//g')
++MY_LANG="LC_ALL=$LDM_LANGUAGE LANGUAGE=$AUX_LANGUAGE LANG=$LDM_LANGUAGE"
++export MY_LANG
++
+ # Set the DISPLAY env, if not running over encrypted ssh
+ if boolean_is_true "$LDM_DIRECTX"; then
+     MY_DISP="DISPLAY=${LDMINFO_IPADDR}${DISPLAY}"
+diff -uNar ldm_2.2.19.orig.semipatched.orig/rc.d/X95-run-x-session ldm_2.2.19.orig.semipatched/rc.d/X95-run-x-session
+--- ldm_2.2.19.orig.semipatched.orig/rc.d/X95-run-x-session	2019-01-21 14:41:34.636847630 +0100
++++ ldm_2.2.19.orig.semipatched/rc.d/X95-run-x-session	2019-01-21 14:49:36.529155862 +0100
+@@ -16,7 +16,7 @@
+ 
+ if ! boolean_is_true "$LDM_NOMAD"; then
+     if ! boolean_is_true "$LTSP_FATCLIENT"; then
+-        ssh -Y -t -S $LDM_SOCKET $LDM_SERVER "$CLIENT_ENV $MY_LANG $MY_DISP $MY_SCANNER $MY_SOUND $LDM_XSESSION $LDM_SESSION < /dev/null > /dev/null $MY_LOCALDEV"
++        ssh -Y -t -S $LDM_SOCKET $LDM_SERVER "XDG_CURRENT_DESKTOP=thinclient . /etc/profile;$CLIENT_ENV $MY_LANG $MY_DISP $MY_SCANNER $MY_SOUND $LDM_XSESSION $LDM_SESSION < /dev/null > /dev/null $MY_LOCALDEV"
+     else
+         ICEAUTHORITY="$(dirname $XAUTHORITY)/ICEauthority"
+         # Using pam_ck_connector to make fat client sessions ConsoleKit-aware
+diff -uNar ldm_2.2.19.orig.semipatched.orig/screen.d/ldm ldm_2.2.19.orig.semipatched/screen.d/ldm
+--- ldm_2.2.19.orig.semipatched.orig/screen.d/ldm	2019-01-21 14:41:34.636847630 +0100
++++ ldm_2.2.19.orig.semipatched/screen.d/ldm	2019-01-21 14:51:38.407186156 +0100
+@@ -148,4 +148,34 @@
+     set --
+ fi
+ 
+-exec xinit /usr/share/ltsp/xinitrc /usr/sbin/ldm -- ${DISPLAY} vt${TTY} -auth ${XAUTHORITY} ${X_ARGS} "$@" -br >/dev/null 2>&1
++#exec xinit /usr/share/ltsp/xinitrc /usr/sbin/ldm -- ${DISPLAY} vt${TTY} -auth ${XAUTHORITY} ${X_ARGS} "$@" -br >/dev/null 2>&1
++# LLIUREX EDIT
++
++xinitrc=/usr/share/ltsp/xinitrc
++
++case $LDM_LANGUAGE in
++
++	"es_ES.UTF-8" | "es.UTF-8")
++		IMG_LANG="es"
++	;;
++	
++	"ca_ES.UTF-8@valencia" | "ca_ES.UTF-8" )
++		IMG_LANG="val"
++	;;
++	
++	*)
++		IMG_LANG="en"
++	;;
++	
++esac
++
++eval $(getltscfg -a | grep -v export)
++result=$(echo $LTSP_FATCLIENT | grep -iq "true" && echo 1 || echo 0)
++if [ "$result" =  "1" ]; then
++	cp /usr/share/ldm/themes/lliurex/bg_fat_$IMG_LANG.png /usr/share/ldm/themes/lliurex/bg.png || true
++else
++	cp /usr/share/ldm/themes/lliurex/bg_thin_$IMG_LANG.png /usr/share/ldm/themes/lliurex/bg.png || true
++fi
++
++LANG=$LDM_LANGUAGE exec xinit $xinitrc /usr/sbin/ldm -- ${DISPLAY} vt${TTY} -auth ${XAUTHORITY} ${X_ARGS} -br >/dev/null 2>&1
++
