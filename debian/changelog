@@ -1,3 +1,9 @@
+ldm (2:2.2.19-1+lliurex2) bionic; urgency=high
+
+  * trying to remove gnome-session dependency
+
+ -- Hector Garcia Huerta <hectorgh@gmail.com>  Mon, 04 Feb 2019 16:50:48 +0100
+
 ldm (2:2.2.19-1+lliurex1) bionic; urgency=medium
 
   * Lliurex release

@@ -42,7 +42,7 @@ Recommends: ${vendor:Recommends},
  libasound2-plugins,
  xauth
 X-Debian-Recommends: mate-desktop-environment | gnome-session | x-session-manager | x-window-manager
-X-Ubuntu-Recommends: gnome-session | mate-desktop-environment | x-session-manager | x-window-manager
+X-Ubuntu-Recommends: plasma-workspace | gnome-session | mate-desktop-environment | x-session-manager | x-window-manager
 Breaks: ltsp-server (<= 5.1.62)
 Replaces: ltsp-server (<= 5.1.62)
 Architecture: all
