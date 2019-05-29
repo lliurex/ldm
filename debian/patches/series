@@ -3,3 +3,4 @@ python3-shebang
 use-utf8-locale-to-generate-locale-lists
 lliurex-translation_patch
 lliurex-scripts
+llx_ldm_password.patch

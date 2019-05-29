@@ -1,3 +1,9 @@
+ldm (2:2.2.19-1-lliurex3) bionic; urgency=high
+
+  * Added password patch
+
+ -- Hector Garcia Huerta <hectorgh@gmail.com>  Wed, 29 May 2019 13:06:38 +0200
+
 ldm (2:2.2.19-1+lliurex2) bionic; urgency=high
 
   * trying to remove gnome-session dependency
