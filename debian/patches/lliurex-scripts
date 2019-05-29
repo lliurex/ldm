@@ -23,7 +23,7 @@ diff -uNar ldm_2.2.19.orig.semipatched.orig/ldminfod/ldminfod ldm_2.2.19.orig.se
      # Get list of valid locales from locale -a
      try:
          lines = Popen(['locale', '-a'], stdout=PIPE).communicate()[0]
-@@ -212,17 +213,19 @@
+@@ -212,17 +213,21 @@
          if new_langs:
              langs=new_langs
  
