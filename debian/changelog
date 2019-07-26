@@ -1,3 +1,9 @@
+ldm (2:2.2.19-1-lliurex4) bionic; urgency=medium
+
+  * ca_ES@valencia to ca@valencia
+
+ -- Hector Garcia Huerta <hectorgh@gmail.com>  Fri, 26 Jul 2019 10:33:54 +0200
+
 ldm (2:2.2.19-1-lliurex3) bionic; urgency=high
 
   * Added password patch
