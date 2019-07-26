@@ -31,7 +31,7 @@ Reviewed-By: <name and email of someone who approved the patch>
 Last-Update: <YYYY-MM-DD>
 
 --- /dev/null
-+++ ldm-2.2.18/ca_ES@valencia.po
++++ ldm-2.2.18/ca@valencia.po
 @@ -0,0 +1,96 @@
 +# Catalan translation for ldm
 +# Copyright (c) 2008 Rosetta Contributors and Canonical Ltd 2008
@@ -133,12 +133,12 @@ Last-Update: <YYYY-MM-DD>
 +++ ldm-2.2.18/po/LINGUAS
 @@ -1,4 +1,5 @@
  #list all languages here, keep it alphabatical
-+ca_ES@valencia
++ca@valencia
  da
  de
  el
 --- /dev/null
-+++ ldm-2.2.18/po/ca_ES@valencia.po
++++ ldm-2.2.18/po/ca@valencia.po
 @@ -0,0 +1,96 @@
 +# Catalan translation for ldm
 +# Copyright (c) 2008 Rosetta Contributors and Canonical Ltd 2008
